@@ -46,7 +46,9 @@ The `config.json` file is used as the central configuration store.
 | Key       | Description                                              | Type   |  Required? |
 | --------- | -------------------------------------------------------- | ------ | --------- |
 | `devMode` | Disables git functions and generating graphs in you insights repository | `bool` | Yes        |
-| `advancedMode` | Enables month and year records of the repositories. | `bool` | No        |
+| `advancedMode` | Enables month and year records of the repositories. | `bool` | Yes        |
+| `language` | Language of the readme files. *Not supporting* | `string` | Yes        |
+| `repository` | List of repositories to show the insights. | `array` | Yes        |
 
 
 
