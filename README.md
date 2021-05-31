@@ -39,20 +39,14 @@
 - Paste your personal access token in `Value` field.
 - Save your personal access token by click on `Add secret` button.
 
-<table>
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-</table>
+#### Update config.json
+
+The `config.json` file is used as the central configuration store.
+
+| Key       | Description                                              | Type   |  Required? |
+| --------- | -------------------------------------------------------- | ------ | --------- |
+| `devMode` | Disables git functions and generating graphs in you insights repository | `bool` | Yes        |
+| `advancedMode` | Enables month and year records of the repositories. | `bool` | No        |
+
+
+
