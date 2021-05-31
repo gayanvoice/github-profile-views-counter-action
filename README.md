@@ -2,9 +2,9 @@
   <h1>GitHub Insights</h1>
 </div>
 <div align="center" margin>
-  <p>Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>.<br/>
+  <p>Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>.
     The github-insights action updates the insights fetched from <strong>GitHub API</strong> for every 6 hours.<br/>
-    This action is written by gayanvoice. Don't forget to follow me on GitHub and Twitter.</p>
+    This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice) and [Twitter](https://twitter.com/gayanvoice).</p>
 </div>
 
 ### Step 1 - ⚡️ Create a repository from the template 
