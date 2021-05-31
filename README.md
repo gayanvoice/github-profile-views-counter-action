@@ -42,6 +42,16 @@
 #### Update config.json
 
 The `config.json` file is used as the central configuration store.
+```json
+{
+  "devMode": "false",
+  "advancedMode": "true",
+  "language": "en-US",
+  "repository": [
+    "repository-name"
+  ]
+}
+```
 
 | Key       | Description                                              | Type   |  Required? |
 | --------- | -------------------------------------------------------- | ------ | --------- |
