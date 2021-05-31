@@ -39,7 +39,7 @@
 - Paste your personal access token in `Value` field.
 - Save your personal access token by click on `Add secret` button.
 
-#### Update config.json
+### Step 3 - Update config.json
 
 The `config.json` file is used as the central configuration store.
 ```json
