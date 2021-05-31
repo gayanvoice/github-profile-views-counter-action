@@ -77,7 +77,7 @@ let Index = function () {
                 }
                 if (!request.devMode) {
                     await summaryReadme.updateSummaryMarkDownFile(response, request);
-                    await commitGit.commit("Update views [skip ci]");
+                    await commitGit.commit("Update views");
                     await pushGit.push();
                 }
             }
