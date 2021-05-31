@@ -13,17 +13,32 @@
 - Go to the [template repository](https://github.com/gayanvoice/github-insights-template) of this GitHub Action.
 - Click on `Use this template` button on the top-right.
 - Enter a name for `Repository name` and select `public` option.
-- Click on `Create repository from template` to create the repository.
+- Click on `Create repository from template` to create your insights repository.
 
-**Billing note:** GitHub offers [unlimited build minutes](https://github.com/pricing) for `pubic` repositories. If you select `private` option when you create the repository you have to pay for build minutes or limit the number of build jobs in `- cron` option in [action.yml](https://github.com/gayanvoice/github-insights-template/blob/master/.github/workflows/action.yml) of your repository.
+**Billing note:** GitHub offers [unlimited build minutes](https://github.com/pricing) for `pubic` repositories. If you select `private` option when you create the repository you have to pay for build minutes or limit the number of build jobs in `- cron` option in [action.yml](https://github.com/gayanvoice/github-insights-template/blob/master/.github/workflows/action.yml) of your insights repository.
 
 ### Step 2 - Add repository secrets
+
+#### Generate personal access token
 
 - Click on your profile picture on the top-right corener and select `Settings` option.
 - In the left sidebar, select `Developer settings` option.
 - In the left sidebar, click on `Personal access tokens` option.
 - Click on `Generate new token` button.
-- Go to [Personal Access Tokens](https://github.com/settings/tokens) in Developer settings.
+- Enter a name for the token.
+- Select `repo` and `workflow` options from scopes.
+- Click on `Generate token` button.
+- Copy the token to a file.
+
+#### Add the repository secret
+
+- In your insights repository, select `Settings` option.
+- In the left sidebar, click on `Secrets` option.
+- Click on `New repository secret` button on top-right corner of `Actions secrets` page.
+- Enter the name of the secret as `INSIGHTS_TOKEN` in `Name` field.
+- Paste your personal access token in `Value` field.
+- Save your personal access token by click on `Add secret` button.
+
 <table>
   <tr>
     <th>Firstname</th>
