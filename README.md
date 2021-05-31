@@ -1,11 +1,9 @@
 <div align="center">
   <h1>GitHub Insights</h1>
 </div>
-<div align="center" margin>
-  <p>Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>.
-    The github-insights action updates the insights fetched from <strong>GitHub API</strong> for every 6 hours.<br/>
-    This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice) and [Twitter](https://twitter.com/gayanvoice).</p>
-</div>
+
+Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>. The github-insights action updates the insights fetched from <strong>GitHub API</strong> for every 6 hours.
+This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice) and [Twitter](https://twitter.com/gayanvoice).
 
 ### Step 1 - ⚡️ Create a repository from the template 
 
@@ -41,7 +39,7 @@
 
 ### Step 3 - Update config.json
 
-The `config.json` file is used as the central configuration store.
+The `config.json` file is used as the central configuration store. Add names of repositories you want to store insights. You can follow this [config.json](https://github.com/gayanvoice/insights/blob/master/config.json).
 ```json
 {
   "devMode": "false",
