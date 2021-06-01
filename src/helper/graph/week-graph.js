@@ -10,7 +10,7 @@ let weekGraph = function () {
         let countData = [];
         if(week.status){
             for(const view of week.views){
-                labels.push('"' + view.timestamp.getMonth() + '/' + view.timestamp.getDate() + '"');
+                labels.push('"' + (view.timestamp.getMonth() + 1) + '/' + view.timestamp.getDate() + '"');
                 uniqueData.push(view.uniques);
                 countData.push(view.count);
             }

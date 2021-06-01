@@ -10,7 +10,7 @@ let yearGraph = (function () {
         let countData = [];
         if(year.status){
             for(const view of year.views){
-                labels.push('"' + view.timestamp.getFullYear() + '/' + view.timestamp.getMonth() + '"');
+                labels.push('"' + (view.timestamp.getFullYear() + 1) + '/' + view.timestamp.getMonth() + '"');
                 uniqueData.push(view.uniques);
                 countData.push(view.count);
             }

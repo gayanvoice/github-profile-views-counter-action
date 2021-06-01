@@ -10,7 +10,7 @@ let monthGraph = (function () {
         let countData = [];
         if(month.status){
             for(const view of month.views){
-                labels.push('"' + view.timestamp.getMonth() + '/' + view.timestamp.getDate() + '"');
+                labels.push('"' + (view.timestamp.getMonth() + 1) + '/' + view.timestamp.getDate() + '"');
                 uniqueData.push(view.uniques);
                 countData.push(view.count);
             }
