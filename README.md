@@ -58,5 +58,7 @@ The `config.json` file is used as the central configuration store. Add names of 
 | `language` | Language of the readme files. *Not supporting* | `string` | Yes        |
 | `repository` | List of repositories to show the insights. | `array` | Yes        |
 
+### Step - 4
+After you setting up GitHub Insights you can run the workflow in Actions. Click on `Run workflow` button in `Actions`. You can follow this [actions](https://github.com/gayanvoice/insights/actions/workflows/action.yml).
 
 
