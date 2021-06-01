@@ -1,9 +1,8 @@
-<div align="center">
-  <h1>GitHub Insights</h1>
-</div>
+# GitHub Insights
 
-Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>. The github-insights action updates the insights fetched from <strong>GitHub API</strong> for every 6 hours.
-This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice) and [Twitter](https://twitter.com/gayanvoice).
+Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using <strong>GitHub Actions</strong>. The github-insights action updates the insights fetched from <strong>GitHub API</strong> for every 6 hours. Yuo can follow how this was deployed using [gayanvoice/insights](https://github.com/gayanvoice/insights).
+
+This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice), [Medium](https://medium.com/@gayanvoice) and [Twitter](https://twitter.com/gayanvoice).
 
 ### Step 1 - ⚡️ Create a repository from the template 
 
