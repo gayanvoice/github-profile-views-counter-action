@@ -2,7 +2,7 @@
   
 Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using [GitHub Actions](https://github.com/features/actions).  The github-insights action updates the insights fetched from [GitHub API](https://docs.github.com/en/rest) for [every 6 hours](https://github.com/gayanvoice/github-insights-template/blob/master/.github/workflows/action.yml#L4).
 
-This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice), [Medium](https://gayanvoice.medium.com) and [Twitter](https://twitter.com/gayanvoice).  
+This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice), [Medium](https://medium.com/@gayanvoice) and [Twitter](https://twitter.com/gayanvoice).  
 
 ## Setup
 
