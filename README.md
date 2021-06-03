@@ -1,6 +1,6 @@
 # 📈 GitHub Insights  
   
-Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using [GitHub Actions](https://github.com/features/actions).  The github-insights action updates the insights fetched from [GitHub API](https://docs.github.com/en/rest) for [every 6 hours](https://github.com/gayanvoice/insights/blob/master/.github/workflows/action.yml#L4).
+Shows number of page views and unique visitors breakdown per week, month, and year of your repositories using [GitHub Actions](https://github.com/features/actions).  The github-insights action updates the insights fetched from [GitHub API](https://docs.github.com/en/rest) for [every 6 hours](https://github.com/gayanvoice/github-insights-template/blob/master/.github/workflows/action.yml#L4).
 
 This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice), [Medium](https://gayanvoice.medium.com) and [Twitter](https://twitter.com/gayanvoice).  
 
@@ -8,7 +8,7 @@ This action is written by [gayanvoice](https://github.com/gayanvoice). Don't for
 
 ### Step 1 - ⚡️ Create a repository from the template   
 - Star ⭐ this repository 😉  
-- Go to the [`template repository`](https://github.com/gayanvoice/github-insights-template) of this GitHub Action.  
+- Go to the [github-insights-template](https://github.com/gayanvoice/github-insights-template) of this GitHub Action.  
 - Click on `Use this template` button on the top-right.  
 - Enter a name for `Repository name` and select `public` option.  
 - Click on `Create repository from template` to create your insights repository.  
