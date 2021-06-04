@@ -4,6 +4,9 @@ Shows number of page views and unique visitors breakdown per week, month, and ye
 
 This action is written by [gayanvoice](https://github.com/gayanvoice). Don't forget to follow me on [GitHub](https://github.com/gayanvoice), [Medium](https://medium.com/@gayanvoice) and [Twitter](https://twitter.com/gayanvoice).  
 
+## Watch
+[![How to setup page views counter for your GitHub repositories](https://img.youtube.com/vi/LdYrV6VSfqY/0.jpg)](https://www.youtube.com/watch?v=LdYrV6VSfqY)
+
 ## Setup
 
 ### Step 1 - ⚡️ Create a repository from the template   
