@@ -14,6 +14,7 @@ const maxCache = require('./helper/cache/max-cache');
 const summaryCache = require('./helper/cache/summary-cache');
 const requestOctokit = require('./helper/octokit/request-octokit');
 const summarySVG = require('./helper/svg/summary-svg');
+const profileSVG = require('./helper/svg/profile_svg');
 const summaryReadme = require('./helper/readme/summary-readme');
 const weekReadme = require('./helper/readme/week-readme');
 const monthReadme = require('./helper/readme/month-readme');
@@ -75,6 +76,7 @@ let Index = function () {
                         }
                     }
                 }
+                await profileSVG.updateProfileSVGFile(response);
                 if (!request.devMode) {
                     await summaryReadme.updateSummaryMarkDownFile(response, request);
                     await commitGit.commit("Update views");

@@ -6,7 +6,7 @@ let summarySVG = (function () {
     let updateSummarySVGFile = async function (repositoryName) {
         let summaryCache = await recordSummaryFile.readSummaryCacheFile(repositoryName);
         let object = await svg.create(summaryCache.views.summary.count)
-        await svgFile.createSVGFile(repositoryName, filename, object);
+        await svgFile.createBadgeSVGFile(repositoryName, filename, object);
     }
     return {
         updateSummarySVGFile: updateSummarySVGFile
