@@ -16068,13 +16068,34 @@ let markdownTemplate = function () {
             return `\n`
         }
     }
-    let rowComponent = function (views) {
-        let row = `| Last Updated | Unique | Count |\n | ------------ | --------------- | ----- |\n`;
+    let createRepositoryPageTableComponent = function (views) {
+        let table = `<table>\n`;
+        table = table + `\t<tr>\n`;
+        table = table + `\t\t<th>\n`;
+        table = table + `\t\t\tLast Updated\n`;
+        table = table + `\t\t</th>\n`;
+        table = table + `\t\t<th>\n`;
+        table = table + `\t\t\tUnique\n`;
+        table = table + `\t\t</th>\n`;
+        table = table + `\t\t<th>\n`;
+        table = table + `\t\t\tCount\n`;
+        table = table + `\t\t</th>\n`;
+        table = table + `\t</tr>\n`;
         for (const view of views.reverse()) {
-            row = `${row} | \`${view.timestamp.getFullYear()}/${view.timestamp.getMonth() + 1}/${view.timestamp.getDate()}\` |  \`${view.uniques}\` | \`${view.count}\` |\n`;
+            table = table + `\t<tr>\n`;
+            table = table + `\t\t<td>\n`;
+            table = table + `\t\t\t<code>${view.timestamp.getFullYear()}/${view.timestamp.getMonth() + 1}/${view.timestamp.getDate()}</code>\n`;
+            table = table + `\t\t</td>\n`;
+            table = table + `\t\t<td>\n`;
+            table = table + `\t\t\t<code>${view.uniques}</code>\n`;
+            table = table + `\t\t</td>\n`;
+            table = table + `\t\t<td>\n`;
+            table = table + `\t\t\t<code>${view.count}</code>\n`;
+            table = table + `\t\t</td>\n`;
+            table = table + `\t</tr>\n`;
         }
-        row = row + `\n\n`
-        return row;
+        table = table + `</table>\n\n`;
+        return table;
     }
     let repositoryPage = async function (ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, views, file, response, request) {
         let insightsRepositoryUrl = `https://github.com/${response.ownerLogin}/${request.insightsRepository}`;
@@ -16087,8 +16108,11 @@ let markdownTemplate = function () {
         markdown = markdown + menuComponent(request, readmeUrl);
         markdown = markdown + `### :octocat: ${repositoryName}\n`;
         markdown = markdown + `${chart}\n\n`;
-        markdown = markdown + `**:calendar: ${file} Insights Table**\n`;
-        markdown = markdown + rowComponent(views);
+        markdown = markdown + `<details>\n`;
+        markdown = markdown + `\t<summary>Click to expand table</summary>\n`;
+        markdown = markdown + `\t<h2>:calendar: ${file} Page Views Table</h2>\n`;
+        markdown = markdown + createRepositoryPageTableComponent(views);
+        markdown = markdown + `</details>\n`;
         markdown = markdown + `<small><i>Last updated on ${getDate()}</i></small>\n\n`;
         markdown = markdown + `## ✂️Copy and 📋 Paste\n`;
         markdown = markdown + `### SVG Badge\n`;
