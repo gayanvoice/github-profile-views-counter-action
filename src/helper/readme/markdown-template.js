@@ -15,7 +15,7 @@ let markdownTemplate = function () {
         return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} UTC`
     }
     let footerComponent = function (actionName, actionUrl, authorName, authorUrl) {
-        let markdown =  `[**Set up ${actionName} for your repositories ↗️**](${actionUrl})\n`;
+        let markdown =  `[**Set up ${actionName} for your repositories**](${actionUrl})\n`;
         markdown = markdown + `## ⛔ DO NOT\n`;
         markdown = markdown + `- Do not commit any changes to \`./cache\` directory. This feature helps to integrity of the records for visitors.\n`;
         markdown = markdown + `- The app will automatically stop measuring insights until you revoke those commits.\n`;
@@ -25,9 +25,9 @@ let markdownTemplate = function () {
         markdown = markdown + `- [simple-git](https://www.npmjs.com/package/simple-git) - Handling Git commands.\n`;
         markdown = markdown + `- [node-chart-exec](https://www.npmjs.com/package/node-chart-exec) - Generate graphs.\n`;
         markdown = markdown + `## 📄 License\n`;
-        markdown = markdown + `- Powered by: [${actionName} ↗️](${actionUrl})\n`;
-        markdown = markdown + `- Code: [MIT ↗️](./LICENSE) © [${authorName} ↗️](${authorUrl})\n`;
-        markdown = markdown + `- Data in the \`./cache\` directory: [Open Database License ↗️](https://opendatacommons.org/licenses/odbl/1-0/)`;
+        markdown = markdown + `- Powered by: [${actionName}](${actionUrl})\n`;
+        markdown = markdown + `- Code: [MIT](./LICENSE) © [${authorName}](${authorUrl})\n`;
+        markdown = markdown + `- Data in the \`./cache\` directory: [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)`;
         return markdown;
     }
     let createSummaryPageTableComponent = async function (response, insightsRepository) {
@@ -91,62 +91,54 @@ let markdownTemplate = function () {
         markdown = markdown + footerComponent(actionName, actionUrl, authorName, authorUrl);
         return markdown;
     }
-
-    const listMarkDownTemplate = `{header}\n` +
-        `{menu}\n` +
-        `### :octocat: {repositoryName}\n` +
-        `{chart}\n\n` +
-        `**:calendar: {file} Insights Table**\n` +
-        `{rowList}\n` +
-        `<small><i>Last updated on {update}</i></small>\n\n` +
-        `## ✂️Copy and 📋 Paste\n`+
-        `### SVG Badge\n` +
-        `{svgBadge}\n` +
-        `\`\`\`readme\n` +
-        `{svgBadgeCode}\n` +
-        `\`\`\`\n` +
-        `### Header\n` +
-        `{chartBadge}\n` +
-        `\`\`\`readme\n` +
-        `{chartBadgeCode}\n` +
-        `\`\`\`\n` +
-        `FOOTER`;
-    let createListMarkDownTemplate = async function (views, file, response, request) {
-        let template = listMarkDownTemplate;
+    let menuComponent = function (request, readmeUrl) {
+        if (request.advancedMode) {
+            return `| [**Week →**](${readmeUrl}/week.md) | [**Month →**](${readmeUrl}/month.md) | [**Year →**](${readmeUrl}/year.md) |\n| ---- | ---- | ----- |\n`;
+        } else {
+            return `\n`
+        }
+    }
+    let rowComponent = function (views) {
+        let row = `| Last Updated | Unique | Count |\n | ------------ | --------------- | ----- |\n`;
+        for (const view of views.reverse()) {
+            row = `${row} | \`${view.timestamp.getFullYear()}/${view.timestamp.getMonth() + 1}/${view.timestamp.getDate()}\` |  \`${view.uniques}\` | \`${view.count}\` |\n`;
+        }
+        row = row + `\n\n`
+        return row;
+    }
+    let repositoryPage = async function (ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, views, file, response, request) {
         let insightsRepositoryUrl = `https://github.com/${response.ownerLogin}/${request.insightsRepository}`;
         let readmeUrl = `${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}`;
-        let header = `## [🔙 ${request.insightsRepository}](${insightsRepositoryUrl})`;
-        let menu;
-        if (request.advancedMode) {
-            menu = `| [**Week →**](${readmeUrl}/week.md) | [**Month →**](${readmeUrl}/month.md) | [**Year →**](${readmeUrl}/year.md) |\n | ------------ | --------------- | ----- |\n`;
-        } else {
-            menu = `### Some features are mot available\n #### GitHub Insights Action only features \`week\` reports. To active \`month\`, and \`year\` reports `
-            + `edit [config.json](${insightsRepositoryUrl}/blob/master/config.json) and set \`true\` in \`advancedMode\`.`;
-        }
-        let rowList = `| Last Updated | Unique | Count |\n | ------------ | --------------- | ----- |\n`;
-        for (const view of views.reverse()) {
-            rowList = `${rowList} | \`${view.timestamp.getFullYear()}/${view.timestamp.getMonth() + 1}/${view.timestamp.getDate()}\` |  \`${view.uniques}\` | \`${view.count}\` |\n`;
-        }
-        let chart = `![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/large/${file.toLowerCase()}.png)`;
-        let chartBadge = `# ${response.repositoryName} [<img alt="Image of ${request.insightsRepository}" src="${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/small/week.png" height="20">](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
-        let svgBadge = `[![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/svg/${response.repositoryId}/badge.svg)](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
         let repositoryName = `[${response.repositoryName}](https://github.com/${response.ownerLogin}/${response.repositoryName})`;
-        template = template.replace('{chart}', chart);
-        template = template.replace('{chartBadge}', chartBadge);
-        template = template.replace('{chartBadgeCode}', chartBadge);
-        template = template.replace('{svgBadge}', svgBadge);
-        template = template.replace('{svgBadgeCode}', svgBadge);
-        template = template.replace('{header}', header);
-        template = template.replace('{menu}', menu);
-        template = template.replace('{rowList}', rowList);
-        template = template.replace('{file}', file);
-        template = template.replace('{repositoryName}', repositoryName);
-        template = template.replace('{update}', getDate());
-        return template;
+        let chart = `![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/large/${file.toLowerCase()}.png)`;
+        let svgBadge = `[![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/svg/${response.repositoryId}/badge.svg)](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
+        let chartBadge = `# ${response.repositoryName} [<img alt="Image of ${request.insightsRepository}" src="${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/small/week.png" height="20">](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
+        let markdown = `## [🔙 ${request.insightsRepository}](${insightsRepositoryUrl})\n`;
+        markdown = markdown + menuComponent(request, readmeUrl);
+        markdown = markdown + `### :octocat: ${repositoryName}\n`;
+        markdown = markdown + `${chart}\n\n`;
+        markdown = markdown + `**:calendar: ${file} Insights Table**\n`;
+        markdown = markdown + rowComponent(views);
+        markdown = markdown + `<small><i>Last updated on ${getDate()}</i></small>\n\n`;
+        markdown = markdown + `## ✂️Copy and 📋 Paste\n`;
+        markdown = markdown + `### SVG Badge\n`;
+        markdown = markdown + `${svgBadge}\n`;
+        markdown = markdown + `\`\`\`readme\n`;
+        markdown = markdown + `${svgBadge}\n`;
+        markdown = markdown + `\`\`\`\n`;
+        markdown = markdown + `### Header\n`;
+        markdown = markdown + `${chartBadge}\n`;
+        markdown = markdown +  `\`\`\`readme\n`;
+        markdown = markdown + `${chartBadge}\n`;
+        markdown = markdown + `\`\`\`\n`;
+        markdown = markdown + footerComponent(ACTION_NAME, ACTION_URL, AUTHOR_NAME, ACTION_URL)
+        return markdown;
     }
-
     let createSummaryMarkDownTemplate = async function (response, repository) {
         return await summaryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
+    }
+    let createListMarkDownTemplate = async function (views, file, response, request) {
+        return await repositoryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, views, file, response, request);
     }
     return {
         createListMarkDownTemplate: createListMarkDownTemplate,

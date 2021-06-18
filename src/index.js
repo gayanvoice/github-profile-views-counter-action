@@ -77,11 +77,9 @@ let Index = function () {
                     }
                 }
                 await profileSVG.updateProfileSVGFile(response);
-                if (!request.devMode) {
-                    await summaryReadme.updateSummaryMarkDownFile(response, request);
-                    await commitGit.commit("Update views");
-                    await pushGit.push();
-                }
+                await summaryReadme.updateSummaryMarkDownFile(response, request);
+                if (!request.devMode) await commitGit.commit("Update views");
+                if (!request.devMode) await pushGit.push();
             }
         }
     }
