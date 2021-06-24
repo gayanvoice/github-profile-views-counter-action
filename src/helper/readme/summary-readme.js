@@ -1,12 +1,17 @@
 const markdownTemplate = require('./markdown-template');
 const markdownFile = require('../file/markdown-file');
 let summaryReadme = (function () {
-    let updateSummaryMarkDownFile = async function (response, request) {
-        let object = await markdownTemplate.createSummaryMarkDownTemplate(response, request.insightsRepository)
+    let updateSummaryMarkDownFileAdvanced = async function (response, request) {
+        let object = await markdownTemplate.createSummaryMarkDownTemplateAdvanced(response, request.insightsRepository)
+        await markdownFile.createSummaryMarkDownFile(object);
+    }
+    let updateSummaryMarkDownFileBasic = async function (response, request) {
+        let object = await markdownTemplate.createSummaryMarkDownTemplateBasic(response, request.insightsRepository)
         await markdownFile.createSummaryMarkDownFile(object);
     }
     return {
-        updateSummaryMarkDownFile: updateSummaryMarkDownFile
+        updateSummaryMarkDownFileAdvanced: updateSummaryMarkDownFileAdvanced,
+        updateSummaryMarkDownFileBasic: updateSummaryMarkDownFileBasic
     };
 })();
 module.exports = summaryReadme;

@@ -20,8 +20,8 @@ const weekReadme = require('./helper/readme/week-readme');
 const monthReadme = require('./helper/readme/month-readme');
 const yearReadme = require('./helper/readme/year-readme');
 const weekGraph = require('./helper/graph/week-graph');
-const monthChart = require('./helper/graph/month-graph');
-const yearChart = require('./helper/graph/year-graph');
+const monthGraph = require('./helper/graph/month-graph');
+const yearGraph = require('./helper/graph/year-graph');
 let Index = function () {
     let createDirectories = async function () {
         await cacheDirectory.create();
@@ -41,16 +41,16 @@ let Index = function () {
         await monthReadme.updateMonthMarkDownFile(responseRepository.response, request);
         await yearReadme.updateYearMarkDownFile(responseRepository.response, request);
         if (!request.devMode) await weekGraph.updateWeekGraphFile(responseRepository.response);
-        if (!request.devMode) await monthChart.updateMonthGraphFile(responseRepository.response);
-        if (!request.devMode) await yearChart.updateYearGraphFile(responseRepository.response);
+        if (!request.devMode) await monthGraph.updateMonthGraphFile(responseRepository.response);
+        if (!request.devMode) await yearGraph.updateYearGraphFile(responseRepository.response);
     }
     let basicMode = async function (responseRepository, octokitResponseViews, request) {
         await recordCache.updateRecordCacheFile(responseRepository.response.repositoryId, octokitResponseViews.response);
-        await weekCache.updateWeekCacheFile(responseRepository.response.repositoryId);
+        await yearCache.updateYearCacheFile(responseRepository.response.repositoryId);
         await summaryCache.updateSummaryCacheFile(responseRepository.response.repositoryId);
         await summarySVG.updateSummarySVGFile(responseRepository.response.repositoryId);
-        await weekReadme.updateWeekMarkDownFile(responseRepository.response, request);
-        if (!request.devMode) await weekGraph.updateWeekGraphFile(responseRepository.response);
+        await yearReadme.updateYearMarkDownFile(responseRepository.response, request);
+        if (!request.devMode) await yearGraph.updateYearGraphFile(responseRepository.response);
     }
     let main = async function () {
         let header = await input.getHeader();
@@ -77,7 +77,11 @@ let Index = function () {
                     }
                 }
                 await profileSVG.updateProfileSVGFile(response);
-                await summaryReadme.updateSummaryMarkDownFile(response, request);
+                if (request.advancedMode) {
+                    await summaryReadme.updateSummaryMarkDownFileAdvanced(response, request);
+                } else {
+                    await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
+                }
                 if (!request.devMode) await commitGit.commit("Update views");
                 if (!request.devMode) await pushGit.push();
             }

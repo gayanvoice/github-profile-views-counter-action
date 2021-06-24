@@ -30,7 +30,7 @@ let markdownTemplate = function () {
         markdown = markdown + `- Data in the \`./cache\` directory: [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)`;
         return markdown;
     }
-    let createSummaryPageTableComponent = async function (response, insightsRepository) {
+    let createSummaryPageTableComponent = async function (fileName, response, insightsRepository) {
         let table = `<table>\n`;
         table = table + `\t<tr>\n`;
         table = table + `\t\t<th>\n`;
@@ -53,7 +53,7 @@ let markdownTemplate = function () {
             let summaryCache = await recordSummaryFile.readSummaryCacheFile(repository.repositoryId);
             table = table + `\t<tr>\n`;
             table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${readmeUrl}/${repository.repositoryId}/week.md">\n`;
+            table = table + `\t\t\t<a href="${readmeUrl}/${repository.repositoryId}/${fileName}.md">\n`;
             table = table + `\t\t\t\t${repository.repositoryName}\n`;
             table = table + `\t\t\t</a>\n`;
             table = table + `\t\t</td>\n`;
@@ -64,16 +64,16 @@ let markdownTemplate = function () {
             table = table + `\t\t\t${summaryCache.views.summary.uniques}\n`;
             table = table + `\t\t</td>\n`;
             table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<img alt="Response time graph" src="${graphUrl}/${repository.repositoryId}/small/week.png" height="20"> ${summaryCache.views.summary.count}\n`;
+            table = table + `\t\t\t<img alt="Response time graph" src="${graphUrl}/${repository.repositoryId}/small/${fileName}.png" height="20"> ${summaryCache.views.summary.count}\n`;
             table = table + `\t\t</td>\n`;
             table = table + `\t</tr>\n`;
         }
         table = table + `</table>\n\n`;
         return table;
     }
-    let summaryPage = async function (actionName, actionUrl, authorName, authorUrl, response, insightsRepository) {
+    let summaryPage = async function (fileName, actionName, actionUrl, authorName, authorUrl, response, insightsRepository) {
         let lastUpdate = getDate();
-        let tableComponent = await createSummaryPageTableComponent(response, insightsRepository);
+        let tableComponent = await createSummaryPageTableComponent(fileName, response, insightsRepository);
         let repositoryUrl = `https://github.com/${response[0].ownerLogin}/${insightsRepository}`;
         let svgBadge = `[![Image of ${repositoryUrl}](${repositoryUrl}/blob/master/svg/profile/badge.svg)](${repositoryUrl})`;
         let markdown =  `## [🚀 ${actionName}](${actionUrl})\n`;
@@ -158,15 +158,19 @@ let markdownTemplate = function () {
         markdown = markdown + footerComponent(ACTION_NAME, ACTION_URL, AUTHOR_NAME, ACTION_URL)
         return markdown;
     }
-    let createSummaryMarkDownTemplate = async function (response, repository) {
-        return await summaryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
+    let createSummaryMarkDownTemplateAdvanced = async function (response, repository) {
+        return await summaryPage(`week`, ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
+    }
+    let createSummaryMarkDownTemplateBasic = async function (response, repository) {
+        return await summaryPage(`year`, ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
     }
     let createListMarkDownTemplate = async function (views, file, response, request) {
         return await repositoryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, views, file, response, request);
     }
     return {
         createListMarkDownTemplate: createListMarkDownTemplate,
-        createSummaryMarkDownTemplate: createSummaryMarkDownTemplate
+        createSummaryMarkDownTemplateAdvanced: createSummaryMarkDownTemplateAdvanced,
+        createSummaryMarkDownTemplateBasic: createSummaryMarkDownTemplateBasic
     };
 }();
 module.exports = markdownTemplate

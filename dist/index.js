@@ -16000,7 +16000,7 @@ let markdownTemplate = function () {
         markdown = markdown + `- Data in the \`./cache\` directory: [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)`;
         return markdown;
     }
-    let createSummaryPageTableComponent = async function (response, insightsRepository) {
+    let createSummaryPageTableComponent = async function (fileName, response, insightsRepository) {
         let table = `<table>\n`;
         table = table + `\t<tr>\n`;
         table = table + `\t\t<th>\n`;
@@ -16023,7 +16023,7 @@ let markdownTemplate = function () {
             let summaryCache = await recordSummaryFile.readSummaryCacheFile(repository.repositoryId);
             table = table + `\t<tr>\n`;
             table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${readmeUrl}/${repository.repositoryId}/week.md">\n`;
+            table = table + `\t\t\t<a href="${readmeUrl}/${repository.repositoryId}/${fileName}.md">\n`;
             table = table + `\t\t\t\t${repository.repositoryName}\n`;
             table = table + `\t\t\t</a>\n`;
             table = table + `\t\t</td>\n`;
@@ -16034,16 +16034,16 @@ let markdownTemplate = function () {
             table = table + `\t\t\t${summaryCache.views.summary.uniques}\n`;
             table = table + `\t\t</td>\n`;
             table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<img alt="Response time graph" src="${graphUrl}/${repository.repositoryId}/small/week.png" height="20"> ${summaryCache.views.summary.count}\n`;
+            table = table + `\t\t\t<img alt="Response time graph" src="${graphUrl}/${repository.repositoryId}/small/${fileName}.png" height="20"> ${summaryCache.views.summary.count}\n`;
             table = table + `\t\t</td>\n`;
             table = table + `\t</tr>\n`;
         }
         table = table + `</table>\n\n`;
         return table;
     }
-    let summaryPage = async function (actionName, actionUrl, authorName, authorUrl, response, insightsRepository) {
+    let summaryPage = async function (fileName, actionName, actionUrl, authorName, authorUrl, response, insightsRepository) {
         let lastUpdate = getDate();
-        let tableComponent = await createSummaryPageTableComponent(response, insightsRepository);
+        let tableComponent = await createSummaryPageTableComponent(fileName, response, insightsRepository);
         let repositoryUrl = `https://github.com/${response[0].ownerLogin}/${insightsRepository}`;
         let svgBadge = `[![Image of ${repositoryUrl}](${repositoryUrl}/blob/master/svg/profile/badge.svg)](${repositoryUrl})`;
         let markdown =  `## [🚀 ${actionName}](${actionUrl})\n`;
@@ -16128,15 +16128,19 @@ let markdownTemplate = function () {
         markdown = markdown + footerComponent(ACTION_NAME, ACTION_URL, AUTHOR_NAME, ACTION_URL)
         return markdown;
     }
-    let createSummaryMarkDownTemplate = async function (response, repository) {
-        return await summaryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
+    let createSummaryMarkDownTemplateAdvanced = async function (response, repository) {
+        return await summaryPage(`week`, ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
+    }
+    let createSummaryMarkDownTemplateBasic = async function (response, repository) {
+        return await summaryPage(`year`, ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, response, repository);
     }
     let createListMarkDownTemplate = async function (views, file, response, request) {
         return await repositoryPage(ACTION_NAME, ACTION_URL, AUTHOR_NAME, AUTHOR_URL, views, file, response, request);
     }
     return {
         createListMarkDownTemplate: createListMarkDownTemplate,
-        createSummaryMarkDownTemplate: createSummaryMarkDownTemplate
+        createSummaryMarkDownTemplateAdvanced: createSummaryMarkDownTemplateAdvanced,
+        createSummaryMarkDownTemplateBasic: createSummaryMarkDownTemplateBasic
     };
 }();
 module.exports = markdownTemplate
@@ -16170,12 +16174,17 @@ module.exports = weekReadme;
 const markdownTemplate = __nccwpck_require__(1956);
 const markdownFile = __nccwpck_require__(8818);
 let summaryReadme = (function () {
-    let updateSummaryMarkDownFile = async function (response, request) {
-        let object = await markdownTemplate.createSummaryMarkDownTemplate(response, request.insightsRepository)
+    let updateSummaryMarkDownFileAdvanced = async function (response, request) {
+        let object = await markdownTemplate.createSummaryMarkDownTemplateAdvanced(response, request.insightsRepository)
+        await markdownFile.createSummaryMarkDownFile(object);
+    }
+    let updateSummaryMarkDownFileBasic = async function (response, request) {
+        let object = await markdownTemplate.createSummaryMarkDownTemplateBasic(response, request.insightsRepository)
         await markdownFile.createSummaryMarkDownFile(object);
     }
     return {
-        updateSummaryMarkDownFile: updateSummaryMarkDownFile
+        updateSummaryMarkDownFileAdvanced: updateSummaryMarkDownFileAdvanced,
+        updateSummaryMarkDownFileBasic: updateSummaryMarkDownFileBasic
     };
 })();
 module.exports = summaryReadme;
@@ -16329,8 +16338,8 @@ const weekReadme = __nccwpck_require__(6071);
 const monthReadme = __nccwpck_require__(7181);
 const yearReadme = __nccwpck_require__(807);
 const weekGraph = __nccwpck_require__(8305);
-const monthChart = __nccwpck_require__(684);
-const yearChart = __nccwpck_require__(5804);
+const monthGraph = __nccwpck_require__(684);
+const yearGraph = __nccwpck_require__(5804);
 let Index = function () {
     let createDirectories = async function () {
         await cacheDirectory.create();
@@ -16350,16 +16359,16 @@ let Index = function () {
         await monthReadme.updateMonthMarkDownFile(responseRepository.response, request);
         await yearReadme.updateYearMarkDownFile(responseRepository.response, request);
         if (!request.devMode) await weekGraph.updateWeekGraphFile(responseRepository.response);
-        if (!request.devMode) await monthChart.updateMonthGraphFile(responseRepository.response);
-        if (!request.devMode) await yearChart.updateYearGraphFile(responseRepository.response);
+        if (!request.devMode) await monthGraph.updateMonthGraphFile(responseRepository.response);
+        if (!request.devMode) await yearGraph.updateYearGraphFile(responseRepository.response);
     }
     let basicMode = async function (responseRepository, octokitResponseViews, request) {
         await recordCache.updateRecordCacheFile(responseRepository.response.repositoryId, octokitResponseViews.response);
-        await weekCache.updateWeekCacheFile(responseRepository.response.repositoryId);
+        await yearCache.updateYearCacheFile(responseRepository.response.repositoryId);
         await summaryCache.updateSummaryCacheFile(responseRepository.response.repositoryId);
         await summarySVG.updateSummarySVGFile(responseRepository.response.repositoryId);
-        await weekReadme.updateWeekMarkDownFile(responseRepository.response, request);
-        if (!request.devMode) await weekGraph.updateWeekGraphFile(responseRepository.response);
+        await yearReadme.updateYearMarkDownFile(responseRepository.response, request);
+        if (!request.devMode) await yearGraph.updateYearGraphFile(responseRepository.response);
     }
     let main = async function () {
         let header = await input.getHeader();
@@ -16386,7 +16395,11 @@ let Index = function () {
                     }
                 }
                 await profileSVG.updateProfileSVGFile(response);
-                await summaryReadme.updateSummaryMarkDownFile(response, request);
+                if (request.advancedMode) {
+                    await summaryReadme.updateSummaryMarkDownFileAdvanced(response, request);
+                } else {
+                    await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
+                }
                 if (!request.devMode) await commitGit.commit("Update views");
                 if (!request.devMode) await pushGit.push();
             }
