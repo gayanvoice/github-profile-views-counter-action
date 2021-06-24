@@ -16103,7 +16103,12 @@ let markdownTemplate = function () {
         let repositoryName = `[${response.repositoryName}](https://github.com/${response.ownerLogin}/${response.repositoryName})`;
         let chart = `![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/large/${file.toLowerCase()}.png)`;
         let svgBadge = `[![Image of ${request.insightsRepository}](${insightsRepositoryUrl}/blob/master/svg/${response.repositoryId}/badge.svg)](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
-        let chartBadge = `# ${response.repositoryName} [<img alt="Image of ${request.insightsRepository}" src="${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/small/week.png" height="20">](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
+        let chartBadge;
+        if(request.advancedMode) {
+            chartBadge = `# ${response.repositoryName} [<img alt="Image of ${request.insightsRepository}" src="${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/small/week.png" height="20">](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/week.md)`;
+        } else {
+            chartBadge = `# ${response.repositoryName} [<img alt="Image of ${request.insightsRepository}" src="${insightsRepositoryUrl}/blob/master/graph/${response.repositoryId}/small/year.png" height="20">](${insightsRepositoryUrl}/blob/master/readme/${response.repositoryId}/year.md)`;
+        }
         let markdown = `## [🔙 ${request.insightsRepository}](${insightsRepositoryUrl})\n`;
         markdown = markdown + menuComponent(request, readmeUrl);
         markdown = markdown + `### :octocat: ${repositoryName}\n`;
