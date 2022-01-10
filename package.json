@@ -27,6 +27,7 @@
   "dependencies": {
     "@actions/core": "1.2.6",
     "@octokit/rest": "18.5.3",
+    "dotenv": "^10.0.0",
     "fs-extra": "9.1.0",
     "simple-git": "2.39.0"
   },

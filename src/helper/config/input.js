@@ -2,11 +2,12 @@ const core = require('@actions/core');
 const HeaderModel = require('../../model/input/HeaderModel');
 const RequestModel = require('../../model/input/RequestModel');
 const jsonFile = require('../../helper/file/json-file');
+
 let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';
     // const USER_AGENT = 'process.env.USER_AGENT';
-    const INSIGHT_REPOSITORY = process.env.GITHUB_REPOSITORY;
+    const INSIGHT_REPOSITORY = process.env.INSIGHTS_GITHUB_REPOSITORY;
     const AUTH_KEY = process.env.INSIGHTS_TOKEN;
     const USER_AGENT = process.env.USER_AGENT;
     let getUsernameAndRepository = function () {

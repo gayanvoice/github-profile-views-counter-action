@@ -4114,6 +4114,131 @@ exports.Deprecation = Deprecation;
 
 /***/ }),
 
+/***/ 2437:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+/* @flow */
+/*::
+
+type DotenvParseOptions = {
+  debug?: boolean
+}
+
+// keys and values from src
+type DotenvParseOutput = { [string]: string }
+
+type DotenvConfigOptions = {
+  path?: string, // path to .env file
+  encoding?: string, // encoding of .env file
+  debug?: string // turn on logging for debugging purposes
+}
+
+type DotenvConfigOutput = {
+  parsed?: DotenvParseOutput,
+  error?: Error
+}
+
+*/
+
+const fs = __nccwpck_require__(5747)
+const path = __nccwpck_require__(5622)
+const os = __nccwpck_require__(2087)
+
+function log (message /*: string */) {
+  console.log(`[dotenv][DEBUG] ${message}`)
+}
+
+const NEWLINE = '\n'
+const RE_INI_KEY_VAL = /^\s*([\w.-]+)\s*=\s*(.*)?\s*$/
+const RE_NEWLINES = /\\n/g
+const NEWLINES_MATCH = /\r\n|\n|\r/
+
+// Parses src into an Object
+function parse (src /*: string | Buffer */, options /*: ?DotenvParseOptions */) /*: DotenvParseOutput */ {
+  const debug = Boolean(options && options.debug)
+  const obj = {}
+
+  // convert Buffers before splitting into lines and processing
+  src.toString().split(NEWLINES_MATCH).forEach(function (line, idx) {
+    // matching "KEY' and 'VAL' in 'KEY=VAL'
+    const keyValueArr = line.match(RE_INI_KEY_VAL)
+    // matched?
+    if (keyValueArr != null) {
+      const key = keyValueArr[1]
+      // default undefined or missing values to empty string
+      let val = (keyValueArr[2] || '')
+      const end = val.length - 1
+      const isDoubleQuoted = val[0] === '"' && val[end] === '"'
+      const isSingleQuoted = val[0] === "'" && val[end] === "'"
+
+      // if single or double quoted, remove quotes
+      if (isSingleQuoted || isDoubleQuoted) {
+        val = val.substring(1, end)
+
+        // if double quoted, expand newlines
+        if (isDoubleQuoted) {
+          val = val.replace(RE_NEWLINES, NEWLINE)
+        }
+      } else {
+        // remove surrounding whitespace
+        val = val.trim()
+      }
+
+      obj[key] = val
+    } else if (debug) {
+      log(`did not match key and value when parsing line ${idx + 1}: ${line}`)
+    }
+  })
+
+  return obj
+}
+
+function resolveHome (envPath) {
+  return envPath[0] === '~' ? path.join(os.homedir(), envPath.slice(1)) : envPath
+}
+
+// Populates process.env from .env file
+function config (options /*: ?DotenvConfigOptions */) /*: DotenvConfigOutput */ {
+  let dotenvPath = path.resolve(process.cwd(), '.env')
+  let encoding /*: string */ = 'utf8'
+  let debug = false
+
+  if (options) {
+    if (options.path != null) {
+      dotenvPath = resolveHome(options.path)
+    }
+    if (options.encoding != null) {
+      encoding = options.encoding
+    }
+    if (options.debug != null) {
+      debug = true
+    }
+  }
+
+  try {
+    // specifying an encoding returns a string instead of a buffer
+    const parsed = parse(fs.readFileSync(dotenvPath, { encoding }), { debug })
+
+    Object.keys(parsed).forEach(function (key) {
+      if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+        process.env[key] = parsed[key]
+      } else if (debug) {
+        log(`"${key}" is already defined in \`process.env\` and will not be overwritten`)
+      }
+    })
+
+    return { parsed }
+  } catch (e) {
+    return { error: e }
+  }
+}
+
+module.exports.config = config
+module.exports.parse = parse
+
+
+/***/ }),
+
 /***/ 3338:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -15388,11 +15513,12 @@ const core = __nccwpck_require__(2186);
 const HeaderModel = __nccwpck_require__(3324);
 const RequestModel = __nccwpck_require__(3053);
 const jsonFile = __nccwpck_require__(4271);
+
 let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';
     // const USER_AGENT = 'process.env.USER_AGENT';
-    const INSIGHT_REPOSITORY = process.env.GITHUB_REPOSITORY;
+    const INSIGHT_REPOSITORY = process.env.INSIGHTS_GITHUB_REPOSITORY;
     const AUTH_KEY = process.env.INSIGHTS_TOKEN;
     const USER_AGENT = process.env.USER_AGENT;
     let getUsernameAndRepository = function () {
@@ -15428,6 +15554,7 @@ let input = (function () {
     };
 })();
 module.exports = input;
+
 
 /***/ }),
 
@@ -15640,12 +15767,15 @@ module.exports = svgFile;
 const core = __nccwpck_require__(2186);
 const git = __nccwpck_require__(1193);
 let commitGit = function () {
-    let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
-    let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
+    // let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
+    // let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
+    let INSIGHT_USERNAME = process.env.INSIGHT_USERNAME;
+    let INSIGHT_EMAIL = process.env.INSIGHT_USERNAME;
     let commit = async function (message) {
         core.info(`Git Commit ${message}`)
         try {
-            await git.commit(INSIGHT_BOT_USERNAME, INSIGHT_BOT_EMAIL, message);
+            // await git.commit(INSIGHT_BOT_USERNAME, INSIGHT_BOT_EMAIL, message);
+            await git.commit(INSIGHT_USERNAME, INSIGHT_EMAIL, message);
         } catch (error) {
             core.info(error);
         }
@@ -15656,6 +15786,7 @@ let commitGit = function () {
     };
 }();
 module.exports = commitGit;
+
 
 /***/ }),
 
@@ -15828,6 +15959,7 @@ module.exports = requestCommits;
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2186);
+// eslint-disable-next-line no-unused-vars
 const input = __nccwpck_require__(3664);
 const requestRepositoryOctokit = __nccwpck_require__(3611);
 const verifyCommitsOctokit = __nccwpck_require__(8221);
@@ -15889,6 +16021,7 @@ let requestOctokit = (function () {
 })();
 module.exports = requestOctokit;
 
+
 /***/ }),
 
 /***/ 3611:
@@ -15949,7 +16082,8 @@ let verifyCommits = (function () {
         if (responseCommits.status) {
             for (const commit of responseCommits.response) {
                 if (commit !== USERNAME) {
-                    return false;
+                    // return false;
+                    return true;  // allow commits from other users
                 }
             }
             return true;
@@ -15962,6 +16096,7 @@ let verifyCommits = (function () {
     };
 })();
 module.exports = verifyCommits;
+
 
 /***/ }),
 
@@ -16149,6 +16284,7 @@ let markdownTemplate = function () {
     };
 }();
 module.exports = markdownTemplate
+
 
 /***/ }),
 
@@ -16345,6 +16481,10 @@ const yearReadme = __nccwpck_require__(807);
 const weekGraph = __nccwpck_require__(8305);
 const monthGraph = __nccwpck_require__(684);
 const yearGraph = __nccwpck_require__(5804);
+const dotenv = __nccwpck_require__(2437);
+
+dotenv.config();
+
 let Index = function () {
     let createDirectories = async function () {
         await cacheDirectory.create();
@@ -16405,7 +16545,7 @@ let Index = function () {
                 } else {
                     await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
                 }
-                if (!request.devMode) await commitGit.commit("Update views");
+                if (!request.devMode) await commitGit.commit("Updated number of views of repositories");
                 if (!request.devMode) await pushGit.push();
             }
         }
@@ -16415,6 +16555,7 @@ let Index = function () {
     };
 }();
 Index.run().then(() => { });
+
 
 /***/ }),
 

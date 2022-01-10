@@ -9,7 +9,8 @@ let verifyCommits = (function () {
         if (responseCommits.status) {
             for (const commit of responseCommits.response) {
                 if (commit !== USERNAME) {
-                    return false;
+                    // return false;
+                    return true;  // allow commits from other users
                 }
             }
             return true;

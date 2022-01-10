@@ -22,6 +22,10 @@ const yearReadme = require('./helper/readme/year-readme');
 const weekGraph = require('./helper/graph/week-graph');
 const monthGraph = require('./helper/graph/month-graph');
 const yearGraph = require('./helper/graph/year-graph');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 let Index = function () {
     let createDirectories = async function () {
         await cacheDirectory.create();
@@ -82,7 +86,7 @@ let Index = function () {
                 } else {
                     await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
                 }
-                if (!request.devMode) await commitGit.commit("Update views");
+                if (!request.devMode) await commitGit.commit("Updated number of views of repositories");
                 if (!request.devMode) await pushGit.push();
             }
         }
