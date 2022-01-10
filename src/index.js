@@ -86,7 +86,7 @@ let Index = function () {
                 } else {
                     await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
                 }
-                if (!request.devMode) await commitGit.commit("Update views");
+                if (!request.devMode) await commitGit.commit("Updated number of views of repositories");
                 if (!request.devMode) await pushGit.push();
             }
         }
