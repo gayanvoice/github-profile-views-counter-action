@@ -3,8 +3,8 @@ const git = require('../../core/git');
 let commitGit = function () {
     // let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
     // let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
-    let INSIGHT_USERNAME = process.env.INSIGHT_USERNAME;
-    let INSIGHT_EMAIL = process.env.INSIGHT_USERNAME;
+    let INSIGHT_USERNAME = 'formidablae';
+    let INSIGHT_EMAIL = '81068781+formidablae@users.noreply.github.com';
     let commit = async function (message) {
         core.info(`Git Commit ${message}`)
         try {
