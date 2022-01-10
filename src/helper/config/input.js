@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const HeaderModel = require('../../model/input/HeaderModel');
 const RequestModel = require('../../model/input/RequestModel');
 const jsonFile = require('../../helper/file/json-file');
+
 let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';

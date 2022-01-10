@@ -15388,6 +15388,7 @@ const core = __nccwpck_require__(2186);
 const HeaderModel = __nccwpck_require__(3324);
 const RequestModel = __nccwpck_require__(3053);
 const jsonFile = __nccwpck_require__(4271);
+
 let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';
@@ -15428,6 +15429,7 @@ let input = (function () {
     };
 })();
 module.exports = input;
+
 
 /***/ }),
 
@@ -15640,12 +15642,13 @@ module.exports = svgFile;
 const core = __nccwpck_require__(2186);
 const git = __nccwpck_require__(1193);
 let commitGit = function () {
-    let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
-    let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
+    // let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
+    // let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
     let commit = async function (message) {
         core.info(`Git Commit ${message}`)
         try {
-            await git.commit(INSIGHT_BOT_USERNAME, INSIGHT_BOT_EMAIL, message);
+            // await git.commit(INSIGHT_BOT_USERNAME, INSIGHT_BOT_EMAIL, message);
+            await git.commit('formidablae', '81068781+formidablae@users.noreply.github.com', message);
         } catch (error) {
             core.info(error);
         }
@@ -15656,6 +15659,7 @@ let commitGit = function () {
     };
 }();
 module.exports = commitGit;
+
 
 /***/ }),
 
@@ -15828,7 +15832,7 @@ module.exports = requestCommits;
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2186);
-const input = __nccwpck_require__(3664);
+// const input = require('../config/input');
 const requestRepositoryOctokit = __nccwpck_require__(3611);
 const verifyCommitsOctokit = __nccwpck_require__(8221);
 const requestViewsOctokit = __nccwpck_require__(7776);
@@ -15888,6 +15892,7 @@ let requestOctokit = (function () {
     };
 })();
 module.exports = requestOctokit;
+
 
 /***/ }),
 
@@ -15949,7 +15954,8 @@ let verifyCommits = (function () {
         if (responseCommits.status) {
             for (const commit of responseCommits.response) {
                 if (commit !== USERNAME) {
-                    return false;
+                    // return false;
+                    return true;  // allow commits from other users
                 }
             }
             return true;
@@ -15962,6 +15968,7 @@ let verifyCommits = (function () {
     };
 })();
 module.exports = verifyCommits;
+
 
 /***/ }),
 
@@ -16149,6 +16156,7 @@ let markdownTemplate = function () {
     };
 }();
 module.exports = markdownTemplate
+
 
 /***/ }),
 
@@ -16345,6 +16353,7 @@ const yearReadme = __nccwpck_require__(807);
 const weekGraph = __nccwpck_require__(8305);
 const monthGraph = __nccwpck_require__(684);
 const yearGraph = __nccwpck_require__(5804);
+
 let Index = function () {
     let createDirectories = async function () {
         await cacheDirectory.create();
@@ -16405,7 +16414,7 @@ let Index = function () {
                 } else {
                     await summaryReadme.updateSummaryMarkDownFileBasic(response, request);
                 }
-                if (!request.devMode) await commitGit.commit("Update views");
+                if (!request.devMode) await commitGit.commit("Updated number of views of repositories");
                 if (!request.devMode) await pushGit.push();
             }
         }
@@ -16415,6 +16424,7 @@ let Index = function () {
     };
 }();
 Index.run().then(() => { });
+
 
 /***/ }),
 
