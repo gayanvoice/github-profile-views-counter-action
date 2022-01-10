@@ -1,6 +1,5 @@
 const core = require('@actions/core');
-// eslint-disable-next-line no-unused-vars
-const input = require('../config/input');
+// const input = require('../config/input');
 const requestRepositoryOctokit = require('../octokit/request-repository');
 const verifyCommitsOctokit = require('../octokit/verify-commits');
 const requestViewsOctokit = require('../octokit/request-views');

@@ -15393,6 +15393,7 @@ let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';
     // const USER_AGENT = 'process.env.USER_AGENT';
+    // const INSIGHT_REPOSITORY = process.env.INSIGHTS_GITHUB_REPOSITORY;
     const INSIGHT_REPOSITORY = process.env.INSIGHTS_GITHUB_REPOSITORY;
     const AUTH_KEY = process.env.INSIGHTS_TOKEN;
     const USER_AGENT = process.env.USER_AGENT;
@@ -15834,8 +15835,7 @@ module.exports = requestCommits;
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2186);
-// eslint-disable-next-line no-unused-vars
-const input = __nccwpck_require__(3664);
+// const input = require('../config/input');
 const requestRepositoryOctokit = __nccwpck_require__(3611);
 const verifyCommitsOctokit = __nccwpck_require__(8221);
 const requestViewsOctokit = __nccwpck_require__(7776);
