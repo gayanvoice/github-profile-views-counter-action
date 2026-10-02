@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint .",
-    "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "prepare": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\" && rollup src/index.js --file dist/index.js --format es --sourcemap -p commonjs -p node-resolve",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "all": "npm run lint && npm run prepare && npm run test"
   },
@@ -32,7 +32,9 @@
     "simple-git": "3.36.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "0.45.0",
+    "@rollup/plugin-commonjs": "29.0.3",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "rollup": "4.63.3",
     "eslint": "10.10.0",
     "jest": "30.5.2"
   }
