@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const directory = require('../../core/directory');
+import * as core from '@actions/core';
+import directory from '../../core/directory.js';
 let svgDirectory = (function () {
     let SVG_DIRECTORY = 'svg';
     let create = async function () {
@@ -11,4 +11,4 @@ let svgDirectory = (function () {
         create: create
     };
 })();
-module.exports = svgDirectory;
+export default svgDirectory;

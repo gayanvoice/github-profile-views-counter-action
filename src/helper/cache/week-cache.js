@@ -1,7 +1,7 @@
-const range = require('../../core/range');
-const record = require('../../core/record');
-const recordCacheFile = require('../../helper/cache/record-cache');
-const jsonFile = require('../../helper/file/json-file');
+import range from '../../core/range.js';
+import record from '../../core/record.js';
+import recordCacheFile from '../../helper/cache/record-cache.js';
+import jsonFile from '../../helper/file/json-file.js';
 let weekCache = (function () {
     const MAXIMUM_DAYS = 7;
     const WEEK = 'week';
@@ -27,4 +27,4 @@ let weekCache = (function () {
         readWeekCacheFile: readWeekCacheFile
     };
 })();
-module.exports = weekCache;
+export default weekCache;

@@ -1,9 +1,9 @@
-const core = require('@actions/core');
-const input = require('../config/input');
-const requestRepositoryOctokit = require('../octokit/request-repository');
-const verifyCommitsOctokit = require('../octokit/verify-commits');
-const requestViewsOctokit = require('../octokit/request-views');
-const RequestModel = require('../../model/octokit/RequestModel');
+import * as core from '@actions/core';
+import input from '../config/input.js';
+import requestRepositoryOctokit from '../octokit/request-repository.js';
+import verifyCommitsOctokit from '../octokit/verify-commits.js';
+import requestViewsOctokit from '../octokit/request-views.js';
+import RequestModel from '../../model/octokit/RequestModel.js';
 let requestOctokit = (function () {
     let verifyCommits = async function (header, request) {
         let verify =  await verifyCommitsOctokit.verify(header, request.username, request.insightsRepository);
@@ -58,4 +58,4 @@ let requestOctokit = (function () {
         requestRepository: requestRepository
     };
 })();
-module.exports = requestOctokit;
+export default requestOctokit;

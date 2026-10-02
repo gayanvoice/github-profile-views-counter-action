@@ -26,4 +26,4 @@ let ConfigDataModel = function (file) {
     this.language = getLanguageValue(file.language);
     this.repository = getRepositoryArray(file.repository);
 }
-module.exports = ConfigDataModel;
+export default ConfigDataModel;

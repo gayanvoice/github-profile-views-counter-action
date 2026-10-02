@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const directory = require('../../core/directory');
+import * as core from '@actions/core';
+import directory from '../../core/directory.js';
 let graphDirectory = (function () {
     let GRAPH_DIRECTORY = 'graph';
     let create = async function () {
@@ -11,4 +11,4 @@ let graphDirectory = (function () {
         create: create
     };
 })();
-module.exports = graphDirectory;
+export default graphDirectory;

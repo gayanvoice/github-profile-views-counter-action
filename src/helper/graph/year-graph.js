@@ -1,6 +1,6 @@
-const graphFile = require('../file/graph-file');
-const yearCache = require('../../helper/cache/year-cache');
-const GraphFileModel = require('../../model/file/GraphFileModel');
+import graphFile from '../file/graph-file.js';
+import yearCache from '../../helper/cache/year-cache.js';
+import GraphFileModel from '../../model/file/GraphFileModel.js';
 let yearGraph = (function () {
     const filename = 'year'
     let updateYearGraphFile = async function (response) {
@@ -22,4 +22,4 @@ let yearGraph = (function () {
         updateYearGraphFile: updateYearGraphFile
     };
 })();
-module.exports = yearGraph;
+export default yearGraph;

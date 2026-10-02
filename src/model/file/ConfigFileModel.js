@@ -1,6 +1,6 @@
-const ConfigDataModel = require('../../model/config/ConfigDataModel');
+import ConfigDataModel from '../../model/config/ConfigDataModel.js';
 let ConfigFileModel = function (status, file) {
     this.status = status;
     if (status) this.data = new ConfigDataModel(file);
 }
-module.exports = ConfigFileModel;
+export default ConfigFileModel;

@@ -3,4 +3,4 @@ let GraphFileModel =  function (labels, uniqueData, countData) {
     this.uniqueData = uniqueData;
     this.countData = countData;
 }
-module.exports = GraphFileModel;
+export default GraphFileModel;

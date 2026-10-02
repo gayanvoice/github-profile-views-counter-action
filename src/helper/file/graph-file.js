@@ -1,5 +1,6 @@
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
+import { promisify } from 'node:util';
+import { exec as execCallback } from 'node:child_process';
+const exec = promisify(execCallback);
 let jsonFile = (function () {
     const directory = 'graph';
     const height = 400;
@@ -35,4 +36,4 @@ let jsonFile = (function () {
         createGraphFile: createGraphFile,
     };
 })();
-module.exports = jsonFile;
+export default jsonFile;

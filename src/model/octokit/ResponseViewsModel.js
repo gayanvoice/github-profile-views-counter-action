@@ -1,4 +1,4 @@
-const DataModel = require('./DataModel');
+import DataModel from './DataModel.js';
 let ResponseViewsModel = function (status, response) {
     this.status = status;
     if(status){
@@ -7,4 +7,4 @@ let ResponseViewsModel = function (status, response) {
         this.response = response;
     }
 }
-module.exports = ResponseViewsModel;
+export default ResponseViewsModel;

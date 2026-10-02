@@ -1,4 +1,4 @@
-const simpleGit = require('simple-git');
+import simpleGit from 'simple-git';
 let git = (function () {
     const git = simpleGit();
     let pull = async function () {
@@ -19,4 +19,4 @@ let git = (function () {
         push: push
     };
 })();
-module.exports = git;
+export default git;

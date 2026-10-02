@@ -1,4 +1,4 @@
-const fs = require('fs-extra')
+import fs from 'fs-extra';
 let directory = (function () {
     let createDirectory = async function (directory) {
         try {
@@ -20,4 +20,4 @@ let directory = (function () {
         createGitIgnore: createGitIgnore
     };
 })();
-module.exports = directory;
+export default directory;

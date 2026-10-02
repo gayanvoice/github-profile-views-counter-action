@@ -1,5 +1,5 @@
-const markdownTemplate = require('./markdown-template');
-const markdownFile = require('../file/markdown-file');
+import markdownTemplate from './markdown-template.js';
+import markdownFile from '../file/markdown-file.js';
 let summaryReadme = (function () {
     let updateSummaryMarkDownFileAdvanced = async function (response, request) {
         let object = await markdownTemplate.createSummaryMarkDownTemplateAdvanced(response, request.insightsRepository)
@@ -14,4 +14,4 @@ let summaryReadme = (function () {
         updateSummaryMarkDownFileBasic: updateSummaryMarkDownFileBasic
     };
 })();
-module.exports = summaryReadme;
+export default summaryReadme;

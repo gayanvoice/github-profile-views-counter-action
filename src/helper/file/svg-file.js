@@ -1,4 +1,4 @@
-const file = require('../../core/file');
+import file from '../../core/file.js';
 let svgFile = (function () {
     const SVG = 'svg';
     let createBadgeSVGFile = async function (repositoryName, fileName, object) {
@@ -14,4 +14,4 @@ let svgFile = (function () {
         createProfileSVGFile: createProfileSVGFile
     };
 })();
-module.exports = svgFile;
+export default svgFile;

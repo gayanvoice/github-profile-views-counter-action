@@ -1,6 +1,6 @@
-const markdownTemplate = require('./markdown-template');
-const markdownFile = require('../file/markdown-file');
-const yearCache = require('../../helper/cache/year-cache');
+import markdownTemplate from './markdown-template.js';
+import markdownFile from '../file/markdown-file.js';
+import yearCache from '../../helper/cache/year-cache.js';
 let yearReadme = (function () {
     const YEAR = 'year';
     let updateYearMarkDownFile = async function (response, request) {
@@ -12,4 +12,4 @@ let yearReadme = (function () {
         updateYearMarkDownFile: updateYearMarkDownFile
     };
 })();
-module.exports = yearReadme;
+export default yearReadme;

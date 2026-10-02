@@ -13,4 +13,4 @@ let ResponseCommitsModel = function (status, response) {
         this.response = response;
     }
 }
-module.exports = ResponseCommitsModel;
+export default ResponseCommitsModel;

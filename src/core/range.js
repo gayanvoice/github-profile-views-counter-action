@@ -28,13 +28,13 @@ let range = (function () {
     let getDates = function (days) {
         const endDate = new Date()
         const startDate = new Date(endDate)
-        startDate.setDate(startDate.getDate() - days)
+        startDate.setDate(startDate.getDate() - (days - 1))
         return getDatesBetweenDays(startDate, endDate);
     }
     let getMonths = function (maxNumberOfMonths) {
         const endDate = new Date()
         const startDate = new Date(endDate)
-        startDate.setMonth(startDate.getMonth() - maxNumberOfMonths)
+        startDate.setMonth(startDate.getMonth() - (maxNumberOfMonths - 1))
         return getMonthsBetweenDays(startDate, endDate);
     }
 
@@ -44,4 +44,4 @@ let range = (function () {
         getMonths: getMonths
     };
 })();
-module.exports = range;
+export default range;

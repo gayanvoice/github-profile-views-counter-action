@@ -1,4 +1,4 @@
-const recordSummaryFile = require('../../helper/cache/summary-cache');
+import recordSummaryFile from '../../helper/cache/summary-cache.js';
 let markdownTemplate = function () {
     const ACTION_NAME = 'GitHub Profile Views Counter';
     const ACTION_URL = 'https://github.com/gayanvoice/github-profile-views-counter';
@@ -178,4 +178,4 @@ let markdownTemplate = function () {
         createSummaryMarkDownTemplateBasic: createSummaryMarkDownTemplateBasic
     };
 }();
-module.exports = markdownTemplate
+export default markdownTemplate;

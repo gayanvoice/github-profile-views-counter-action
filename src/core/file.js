@@ -1,8 +1,8 @@
-const core = require('@actions/core');
-const fs = require('fs-extra')
-const ConfigFileModel = require('../model/file/ConfigFileModel');
-const CacheFileModel = require('../model/file/CacheFileModel');
-const SummaryFileModel = require('../model/file/SummaryFileModel');
+import * as core from '@actions/core';
+import fs from 'fs-extra';
+import ConfigFileModel from '../model/file/ConfigFileModel.js';
+import CacheFileModel from '../model/file/CacheFileModel.js';
+import SummaryFileModel from '../model/file/SummaryFileModel.js';
 let file = (function () {
     let saveJson = async function (fileName, jsonObject) {
         try {
@@ -67,4 +67,4 @@ let file = (function () {
         readSummaryFile: readSummaryFile
     };
 })();
-module.exports = file;
+export default file;

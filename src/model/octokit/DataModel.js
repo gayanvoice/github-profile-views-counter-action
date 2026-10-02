@@ -1,4 +1,4 @@
-const ViewModel = require('./ViewModel');
+import ViewModel from './ViewModel.js';
 let DataModel = function (data) {
     let views = function (views) {
         let array = [];
@@ -11,4 +11,4 @@ let DataModel = function (data) {
     this.uniques = data.uniques;
     this.views = views(data.views);
 }
-module.exports = DataModel;
+export default DataModel;

@@ -1,6 +1,6 @@
-const graphFile = require('../file/graph-file');
-const monthCache = require('../../helper/cache/month-cache');
-const GraphFileModel = require('../../model/file/GraphFileModel');
+import graphFile from '../file/graph-file.js';
+import monthCache from '../../helper/cache/month-cache.js';
+import GraphFileModel from '../../model/file/GraphFileModel.js';
 let monthGraph = (function () {
     const filename = 'month'
     let updateMonthGraphFile = async function (response) {
@@ -22,4 +22,4 @@ let monthGraph = (function () {
         updateMonthGraphFile: updateMonthGraphFile
     };
 })();
-module.exports = monthGraph;
+export default monthGraph;

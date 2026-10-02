@@ -1,5 +1,5 @@
-const {Octokit} = require("@octokit/rest");
-const ResponseModel = require('../model/octokit/ResponseModel');
+import { Octokit } from '@octokit/rest';
+import ResponseModel from '../model/octokit/ResponseModel.js';
 let octokit = (function () {
     let request = async function (header, request) {
         const octokit = new Octokit({
@@ -26,4 +26,4 @@ let octokit = (function () {
         request: request
     };
 })();
-module.exports = octokit;
+export default octokit;

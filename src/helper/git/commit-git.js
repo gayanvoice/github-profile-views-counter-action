@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const git = require('../../core/git');
+import * as core from '@actions/core';
+import git from '../../core/git.js';
 let commitGit = function () {
     let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
     let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
@@ -16,4 +16,4 @@ let commitGit = function () {
         commit: commit
     };
 }();
-module.exports = commitGit;
+export default commitGit;

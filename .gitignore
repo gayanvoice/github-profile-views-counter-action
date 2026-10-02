@@ -1,5 +1,8 @@
 node_modules/
 
+cache/
+readme/
+
 # Editors
 .vscode/
 .idea/

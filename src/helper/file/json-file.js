@@ -1,4 +1,4 @@
-const file = require('../../core/file');
+import file from '../../core/file.js';
 let jsonFile = (function () {
     const CACHE = 'cache';
     let createCacheFile = async function (repositoryName, fileName, object) {
@@ -24,4 +24,4 @@ let jsonFile = (function () {
         readSummaryCacheFile: readSummaryCacheFile,
     };
 })();
-module.exports = jsonFile;
+export default jsonFile;

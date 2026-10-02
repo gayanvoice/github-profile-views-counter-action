@@ -1,8 +1,8 @@
-const range = require('../../core/range');
-const recordCacheFile = require('../../helper/cache/record-cache');
-const jsonFile = require('../../helper/file/json-file');
-const SummaryModel = require('../../model/cache/SummaryModel');
-const SummaryFileModel = require('../../model/cache/SummaryFileModel');
+import range from '../../core/range.js';
+import recordCacheFile from '../../helper/cache/record-cache.js';
+import jsonFile from '../../helper/file/json-file.js';
+import SummaryModel from '../../model/cache/SummaryModel.js';
+import SummaryFileModel from '../../model/cache/SummaryFileModel.js';
 let summaryCache = (function () {
     const SUMMARY = 'summary';
     let checkIfUpdated = function (date, timestamp) {
@@ -70,4 +70,4 @@ let summaryCache = (function () {
         readSummaryCacheFile: readSummaryCacheFile
     };
 })();
-module.exports = summaryCache;
+export default summaryCache;

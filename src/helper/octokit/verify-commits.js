@@ -1,5 +1,5 @@
-const requestCommits = require('./request-commits');
-const RequestModel = require('../../model/octokit/RequestModel');
+import requestCommits from './request-commits.js';
+import RequestModel from '../../model/octokit/RequestModel.js';
 let verifyCommits = (function () {
     const URL = '/commits?path=cache';
     const USERNAME = 'github-actions[bot]';
@@ -21,4 +21,4 @@ let verifyCommits = (function () {
         verify: verify
     };
 })();
-module.exports = verifyCommits;
+export default verifyCommits;

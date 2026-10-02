@@ -1,4 +1,4 @@
-const file = require('../../core/file');
+import file from '../../core/file.js';
 let markdownFile = (function () {
     const README = 'readme';
     let createListMarkDownFile = async function (repositoryId, fileName, object) {
@@ -14,4 +14,4 @@ let markdownFile = (function () {
         createSummaryMarkDownFile: createSummaryMarkDownFile
     };
 })();
-module.exports = markdownFile;
+export default markdownFile;

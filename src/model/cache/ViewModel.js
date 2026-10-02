@@ -6,4 +6,4 @@ let ViewModel = function (view) {
     this.count = view.count;
     this.uniques = view.uniques;
 }
-module.exports = ViewModel;
+export default ViewModel;

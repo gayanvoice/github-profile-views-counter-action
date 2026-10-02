@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const git = require('../../core/git');
+import * as core from '@actions/core';
+import git from '../../core/git.js';
 let pullGit = function () {
     let pull = async function () {
         core.info(`Git Pull`)
@@ -13,4 +13,4 @@ let pullGit = function () {
         pull: pull
     };
 }();
-module.exports = pullGit;
+export default pullGit;

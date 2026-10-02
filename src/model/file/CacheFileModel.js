@@ -1,4 +1,4 @@
-const View = require('../cache/ViewModel');
+import View from '../cache/ViewModel.js';
 let CacheFileModel =  function (status, response) {
     let getViewsArray = function (views) {
         let views_array = [];
@@ -10,4 +10,4 @@ let CacheFileModel =  function (status, response) {
     this.status = status;
     if (status) this.views = getViewsArray(response);
 }
-module.exports = CacheFileModel;
+export default CacheFileModel;

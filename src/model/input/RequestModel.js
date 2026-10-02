@@ -7,4 +7,4 @@ let RequestModel = function (status, username, insightsRepository, devMode, adva
     if (this.status) this.language = language;
     if (this.status) this.repository = repository;
 }
-module.exports = RequestModel;
+export default RequestModel;

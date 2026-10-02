@@ -26,4 +26,4 @@ let svgFile = (function () {
         create: create
     };
 })();
-module.exports = svgFile
+export default svgFile;

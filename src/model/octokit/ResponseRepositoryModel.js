@@ -1,4 +1,4 @@
-const RepositoryModel = require('./RespositoryModel');
+import RepositoryModel from './RespositoryModel.js';
 let ResponseRepositoryModel = function (status, response) {
     this.status = status;
     if(status){
@@ -7,4 +7,4 @@ let ResponseRepositoryModel = function (status, response) {
         this.response = response;
     }
 }
-module.exports = ResponseRepositoryModel;
+export default ResponseRepositoryModel;

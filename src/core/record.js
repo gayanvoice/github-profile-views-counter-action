@@ -1,4 +1,4 @@
-const ViewModel = require('../model/cache/ViewModel');
+import ViewModel from '../model/cache/ViewModel.js';
 let record = (function () {
     let checkDailyRecord = function (views, date) {
         for (const view of views) {
@@ -91,4 +91,4 @@ let record = (function () {
         checkMonthlyRecordUpdated: checkMonthlyRecordUpdated
     };
 })();
-module.exports = record;
+export default record;

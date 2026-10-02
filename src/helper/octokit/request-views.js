@@ -1,5 +1,5 @@
-const octokit = require('../../core/octokit');
-const ResponseViewsModel = require('../../model/octokit/ResponseViewsModel');
+import octokit from '../../core/octokit.js';
+import ResponseViewsModel from '../../model/octokit/ResponseViewsModel.js';
 let requestViews = (function () {
     let requestResponseViews = async function (header, request) {
         let octokitResponse = await octokit.request(header, request);
@@ -13,4 +13,4 @@ let requestViews = (function () {
         requestResponseViews: requestResponseViews
     };
 })();
-module.exports = requestViews;
+export default requestViews;

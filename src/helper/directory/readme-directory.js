@@ -1,5 +1,5 @@
-const core = require('@actions/core');
-const directory = require('../../core/directory');
+import * as core from '@actions/core';
+import directory from '../../core/directory.js';
 let readmeDirectory = (function () {
     let README_DIRECTORY = 'readme';
     let create = async function () {
@@ -11,4 +11,4 @@ let readmeDirectory = (function () {
         create: create
     };
 })();
-module.exports = readmeDirectory;
+export default readmeDirectory;

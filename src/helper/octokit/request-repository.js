@@ -1,5 +1,5 @@
-const octokit = require('../../core/octokit');
-const ResponseRepositoryModel = require('../../model/octokit/ResponseRepositoryModel');
+import octokit from '../../core/octokit.js';
+import ResponseRepositoryModel from '../../model/octokit/ResponseRepositoryModel.js';
 let requestRepository = (function () {
     let request = async function (header, request) {
         let octokitResponse = await octokit.request(header, request);
@@ -13,4 +13,4 @@ let requestRepository = (function () {
         request: request
     };
 })();
-module.exports = requestRepository;
+export default requestRepository;

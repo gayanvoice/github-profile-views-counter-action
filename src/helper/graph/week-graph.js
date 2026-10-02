@@ -1,6 +1,6 @@
-const weekCache = require('../../helper/cache/week-cache');
-const graphFile = require('../../helper/file/graph-file');
-const GraphFileModel = require('../../model/file/GraphFileModel');
+import weekCache from '../../helper/cache/week-cache.js';
+import graphFile from '../../helper/file/graph-file.js';
+import GraphFileModel from '../../model/file/GraphFileModel.js';
 let weekGraph = function () {
     const filename = 'week'
     let updateWeekGraphFile = async function (response) {
@@ -22,4 +22,4 @@ let weekGraph = function () {
         updateWeekGraphFile: updateWeekGraphFile
     };
 }();
-module.exports = weekGraph;
+export default weekGraph;

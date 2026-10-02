@@ -1,6 +1,6 @@
-const markdownTemplate = require('./markdown-template');
-const markdownFile = require('../file/markdown-file');
-const weekCache = require('../../helper/cache/week-cache');
+import markdownTemplate from './markdown-template.js';
+import markdownFile from '../file/markdown-file.js';
+import weekCache from '../../helper/cache/week-cache.js';
 let weekReadme = (function () {
     const filename = 'week';
     let updateWeekMarkDownFile = async function (response, request) {
@@ -12,4 +12,4 @@ let weekReadme = (function () {
         updateWeekMarkDownFile: updateWeekMarkDownFile
     };
 })();
-module.exports = weekReadme;
+export default weekReadme;

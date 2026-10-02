@@ -1,7 +1,7 @@
-const core = require('@actions/core');
-const HeaderModel = require('../../model/input/HeaderModel');
-const RequestModel = require('../../model/input/RequestModel');
-const jsonFile = require('../../helper/file/json-file');
+import * as core from '@actions/core';
+import HeaderModel from '../../model/input/HeaderModel.js';
+import RequestModel from '../../model/input/RequestModel.js';
+import jsonFile from '../../helper/file/json-file.js';
 let input = (function () {
     // const INSIGHT_REPOSITORY = 'gayanvoice/my-profile-view-counter';
     // const AUTH_KEY = '';
@@ -41,4 +41,4 @@ let input = (function () {
         getRequest: getRequest
     };
 })();
-module.exports = input;
+export default input;

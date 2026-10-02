@@ -1,5 +1,5 @@
-const octokit = require('../../core/octokit');
-const ResponseCommitsModel = require('../../model/octokit/ResponseCommitsModel');
+import octokit from '../../core/octokit.js';
+import ResponseCommitsModel from '../../model/octokit/ResponseCommitsModel.js';
 let requestCommits = (function () {
     let requestResponseCommits = async function (header, request) {
         let octokitResponse = await octokit.request(header, request);
@@ -18,4 +18,4 @@ let requestCommits = (function () {
         requestResponseCommits: requestResponseCommits
     };
 })();
-module.exports = requestCommits;
+export default requestCommits;

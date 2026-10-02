@@ -4,4 +4,4 @@ let Repository = function (data) {
     this.ownerLogin = data.owner.login;
     this.ownerId = data.owner.id;
 }
-module.exports = Repository;
+export default Repository;
