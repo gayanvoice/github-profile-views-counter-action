@@ -43425,13 +43425,13 @@ let jsonFile = (function () {
     let createGraphLargeFile = async function (repository, fileName, graph) {
         const path = `${directory}/${repository}/large/${fileName}.png`;
         const options = false;
-        const command = `npx node-chart-exec@2.0.1 --type='line' --options='${options}' --height=${height} --width=${width} --labels='[${graph.labels}]' --dataset='[{"label":"Unique", "data":[${graph.uniqueData}], "backgroundColor":"${uniqueBackgroundColor}", "borderColor":"${uniqueBorderColor}"}, {"label":"Count", "data":[${graph.countData}], "backgroundColor":"${countBackgroundColor}", "borderColor":"${countBorderColor}"}]' --outputfile='${path}'`;
+        const command = `npx node-chart-exec@3.0.0 --type='line' --options='${options}' --height=${height} --width=${width} --labels='[${graph.labels}]' --dataset='[{"label":"Unique", "data":[${graph.uniqueData}], "backgroundColor":"${uniqueBackgroundColor}", "borderColor":"${uniqueBorderColor}"}, {"label":"Count", "data":[${graph.countData}], "backgroundColor":"${countBackgroundColor}", "borderColor":"${countBorderColor}"}]' --outputfile='${path}'`;
         await execute(command);
     };
     let createGraphSmallFile = async function (repository, fileName, graph) {
         const path = `${directory}/${repository}/small/${fileName}.png`;
         const options = true;
-        const command = `npx node-chart-exec@2.0.1 --type='line' --options='${options}' --height=${height} --width=${width} --labels='[${graph.labels}]' --dataset='[{"label":"Unique", "data":[${graph.uniqueData}], "backgroundColor":"${uniqueBackgroundColor}", "borderColor":"${uniqueBorderColor}"}, {"label":"Count", "data":[${graph.countData}], "backgroundColor":"${countBackgroundColor}", "borderColor":"${countBorderColor}"}]' --outputfile='${path}'`;
+        const command = `npx node-chart-exec@3.0.0 --type='line' --options='${options}' --height=${height} --width=${width} --labels='[${graph.labels}]' --dataset='[{"label":"Unique", "data":[${graph.uniqueData}], "backgroundColor":"${uniqueBackgroundColor}", "borderColor":"${uniqueBorderColor}"}, {"label":"Count", "data":[${graph.countData}], "backgroundColor":"${countBackgroundColor}", "borderColor":"${countBorderColor}"}]' --outputfile='${path}'`;
         await execute(command);
     };
     let createGraphFile = async function (repositoryId, fileName, graph) {
